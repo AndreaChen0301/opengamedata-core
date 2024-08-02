@@ -930,6 +930,11 @@
                 "type": "SequenceBetweenPuzzles",
                 "enabled": false,
                 "description":"Sequence of puzzles and its funnel stage reached of a given session"
+            },
+            "PuzzleCompleteCount": {
+                "type": "PuzzleCompleteCount",
+                "enabled": true,
+                "description":"The number of puzzles completed for each player"
             }
         }
     },
