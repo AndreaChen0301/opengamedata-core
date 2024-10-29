@@ -105,7 +105,9 @@ jobs:
     - name: Connect VPN
       run: echo ${{ secrets.VPN_PASS }} | sudo openconnect --protocol=gp -u ${{ secrets.VPN_USER }} --passwd-on-stdin soe.vpn.wisc.edu &
     - name: Get Dependencies
-      uses: ./.github/actions/OGD_dependencies
+      uses: opengamedata/actions-setup-ogd-py-dependencies@v1.1
+      with:
+        python_version: ${{ vars.OGD_PYTHON_VERSION }}
     - name: Set up Config File
       uses: ./.github/actions/OGD_config
       with:
@@ -171,4 +173,4 @@ jobs:
         mkdir -p ~/.ssh
         echo '${{secrets.VPN_KEY}}' >> ./key.txt
         chmod 600 ./key.txt
-        ssh -o StrictHostKeyChecking=no -i ./key.txt ${{ secrets.VPN_USER }}@${{ vars.FD_WEB_HOST }} "cd /var/www/opengamedata; pwd; ls; python3 reindexer.py;"
+        ssh -o StrictHostKeyChecking=no -i ./key.txt ${{ secrets.VPN_USER }}@${{ vars.FD_WEB_HOST }} "cd /var/www/opengamedata/data; pwd; ls; python3 reindexer.py;"
